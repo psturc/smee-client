@@ -27,6 +27,8 @@ class Client {
     const req = superagent.post(target).send(data.body)
 
     delete data.body
+    // To avoid the issue with 503 when targeting other host than localhost
+    delete data.host
 
     Object.keys(data).forEach(key => {
       req.set(key, data[key])
